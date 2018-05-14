@@ -9,6 +9,10 @@ def abc_random_string(length):
 
 def is_prime(number):
     """Return True if *number* is prime."""
+
+    if number < 2:
+        raise ValueError("{} is not valid value".format(number))
+    
     for element in range(2,number):
         if (number % element) == 0:
             return False
@@ -44,6 +48,11 @@ def test_is_prime():
 def test_is_prime2():
     assert is_prime(12) is False
 
+
+def test_is_prime3():
+    with pytest.raises(ValueError):
+        is_prime(-1)
+    
 
 def test_print_next_prime():
     assert print_next_prime(11) == 13
