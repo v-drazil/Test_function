@@ -4,6 +4,10 @@ import pytest
 
 def abc_random_string(length):
     '''Return abc + random string'''
+
+    if length < 1:
+        raise ValueError("{} is not valid value".format(length))
+    
     return 'abc' + str(urandom(length))
 
 
@@ -41,6 +45,15 @@ def test_abc_random_string2():
     assert abc_random_string(1).startswith("abc")
 
 
+def test_abc_random_string3():
+    assert len(abc_random_string(1)) > 3
+    
+
+def test_abc_random_string4():
+    with pytest.raises(ValueError):
+        abc_random_string(0)
+
+        
 def test_is_prime():
     assert is_prime(11) is True
 
